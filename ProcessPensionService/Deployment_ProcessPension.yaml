@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: processpensionservice
-        image: pmscr.azurecr.io/pensionerdetailmicroserviceimage:latest
+        image: pmscr.azurecr.io/processpensionmicroserviceimage:latest
         resources:
         env:
            - name: ConnectionString
