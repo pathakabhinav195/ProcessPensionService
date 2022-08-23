@@ -1,0 +1,40 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: processpensionservice-deployment 
+  labels:
+    app: ProcessPensionService 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ProcessPensionService
+  template:
+    metadata:
+      labels:
+        app: ProcessPensionService
+    spec:
+      containers:
+      - name: processpensionservice
+        image: pmscr.azurecr.io/pensionerdetailmicroserviceimage:latest
+        resources:
+        env:
+           - name: ConnectionString
+             value: Server = "tcp:authpension.database.windows.net,1433; Initial Catalog = MSONEPensionDb; Persist Security Info = False; User ID = pension; Password = Subhadip@1202; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;"
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+        - name: pensionmanagementsvcsecret  
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: processpensionservicesvc
+spec:
+  type: LoadBalancer
+  selector:
+    app: ProcessPensionService
+  ports:
+  - port: 80
