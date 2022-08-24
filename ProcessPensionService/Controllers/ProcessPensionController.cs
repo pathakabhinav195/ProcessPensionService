@@ -13,12 +13,12 @@ namespace ProcessPensionService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /*[Authorize]*/
+    [Authorize]
     public class ProcessPensionController : Controller
     {
         IProcessPensionMicroservice processPensionService;
         static HttpClient HttpClient = new HttpClient();
-        static string BaseUrl = @"http://52.182.208.211/api/PensionerDetail/";
+        static string BaseUrl = @"http://20.221.104.156/api/PensionerDetail/";
 
         public ProcessPensionController(IProcessPensionMicroservice processPensionService)
         {
