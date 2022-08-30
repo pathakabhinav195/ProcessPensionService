@@ -9,7 +9,7 @@ namespace ProcessPensionService.Repo
 {
     public class ProcessPensionMicroservice : IProcessPensionMicroservice
     {
-        
+        private readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public async Task<ProcessPension> GetProcessPension(PensionerDetail pensioner)
         {
             ProcessPension processPension = new ProcessPension();
@@ -43,6 +43,7 @@ namespace ProcessPensionService.Repo
 
             await db.ProcessPensions.AddAsync(processPension);
             await db.SaveChangesAsync();
+            log.Info("Get process pension");
 
             return processPension;
         }
